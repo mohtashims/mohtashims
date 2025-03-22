@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx_statefulset
+  labels:
+    app: nginx
+spec:
+  serviceName: "nginx_service"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: secure-nginx:1.19
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - name: nginx_storage
+              mountPath: <whatever-path-on-local>
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: nginx_storage
+          persistentVolumeClaim:
+            claimName: nginx-persist
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-persist
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx_service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 443
+  type: LoadBalancer

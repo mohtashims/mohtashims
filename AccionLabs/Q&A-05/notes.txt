@@ -1,0 +1,18 @@
+Reads the file (/tmp/test.txt) line by line
+Converts each line to uppercase (implementation of tr)
+Filters lines that contain "ACTIVE"(implementation of grep)
+Splits the line into words using whitespace (\\s+) as a delimiter
+Prints the split words for debugging
+Extracts the last column (implementaion to awk)
+Removes single quotes (') from the last column before printing it(implementation of sed)
+
+cat /tmp/test.txt
+User1 'ACTIVE' 'John Doe' 'Engineer' 'c5000'
+User2 'PASSIVE' 'Jane Smith' 'HR' 'm5000'
+User3 'ACTIVE' 'Michael Johnson' 'Finance' 'g2000'
+
+Output:
+[soaapp@SOAUATAPP1 ~]$ java TextProcess
+C5000
+G2000
+

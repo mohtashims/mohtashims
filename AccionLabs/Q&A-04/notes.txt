@@ -1,0 +1,14 @@
+[soaapp@SOAUATAPP1 ~]$ cat /tmp/test.txt
+User1 'ACTIVE' 'John Doe' 'Engineer' 'c5000'
+User2 'PASSIVE' 'Jane Smith' 'HR' 'm5000'
+User3 'ACTIVE' 'Michael Johnson' 'Finance' 'g2000'
+
+[soaapp@SOAUATAPP1 ~]$ grep ACTIVE /tmp/test.txt | tr '[:lower:]' '[:upper:]' | awk '{print $NF}' | sed "s/'//g"
+C5000
+G2000
+[soaapp@SOAUATAPP1 ~]$
+
+grep lists rows having ACTIVE string
+tr converts the row to UPPERCASE
+awk gets the last column
+sed removes enclosing single quotes.
