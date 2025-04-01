@@ -94,7 +94,7 @@ jobs:
 
 
   status_check:
-    needs: deploy
+    needs: [build, deploy]
     runs-on: ubuntu-latest
     if: always()
     steps:
