@@ -49,8 +49,8 @@ jobs:
         run: |
           docker run --rm "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" \
             sh -c "if [ -x /sbin/tini ]; then echo 'Tini is installed and executable'; else echo 'Tini check failed'; exit 1; fi && \
-                   echo 'User running Nginx:' && ps -eo user,comm | grep nginx && \
-                   echo 'Ports Nginx is listening on:' && netstat -tuln | grep nginx"
+                   echo 'User running Nginx:' && ps -ef | grep nginx && \
+                   echo 'Ports Nginx is listening on:' && ss -tuln | grep ':80\|:443'"
 
 
       - name: Scan with Trivy
