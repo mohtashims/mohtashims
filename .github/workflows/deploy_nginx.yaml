@@ -95,10 +95,9 @@ jobs:
 
       - name: Create Kind Cluster
         run: |
-          kind create cluster --name secure-nginx-cluster --config kind-cluster-config.yaml
+          kind create cluster --name secure-nginx-cluster --config QA-02/kind-cluster-config.yaml
 
           
-      
 
       - name: Deploy to Kubernetes
         run: |
