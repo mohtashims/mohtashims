@@ -9,13 +9,14 @@ FROM nginx:1.19-alpine
 #    ldd /usr/local/bin/tini
 #    #chmod +x /usr/local/bin/tini
 
-#RUN apk add --no-cache tini-0.19.0-r3
-#RUN apk add --no-cache tini=0.19.0-r3 && tini --version && which tini && \
-#    chmod +x /sbin/tini
-
 RUN apk update && apk upgrade --no-cache
 
-RUN apk add --no-cache tini && tini --version
+#RUN apk add --no-cache tini-0.19.0-r3
+RUN apk add --no-cache tini=0.19.0-r0 && tini --version && which tini && \
+    chmod +x /sbin/tini
+
+
+#RUN apk add --no-cache tini && tini --version
 
 
 RUN addgroup -S newnginx || true && getent passwd newnginx || adduser -S newnginx -G newnginx
