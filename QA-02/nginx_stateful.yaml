@@ -52,13 +52,10 @@ spec:
           ports:
             - containerPort: 443
 
-          volumes:
-            - name: nginx-cache
-              emptyDir: {}
+
           volumeMounts:
             - name: nginx-cache
-              mountPath: /var/cache/nginx    
-          volumeMounts:
+              mountPath: /var/cache/nginx
             - name: nginx-storage
               mountPath: /usr/share/nginx/html
           resources:
@@ -90,6 +87,8 @@ spec:
             periodSeconds: 3
             failureThreshold: 3
       volumes:
+        - name: nginx-cache
+          emptyDir: {}      
         - name: nginx-storage
           persistentVolumeClaim:
             claimName: nginx-storage
