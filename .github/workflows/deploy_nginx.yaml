@@ -101,6 +101,10 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
+
+          kubectl get storageclass
+          kubectl delete storageclass standard
+
           kubectl apply -f QA-02/nginx_stateful.yaml || exit 1
           sleep 30
           kubectl get pods -n nginx-namespace
