@@ -38,7 +38,7 @@ jobs:
         run: ls -R; pwd
 
       - name: Build Docker image
-        run: docker build -t "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" QA-01/. || exit 1
+        run: docker build --network=host -t "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" QA-01/. || exit 1
 
 
       - name: Scan with Trivy
