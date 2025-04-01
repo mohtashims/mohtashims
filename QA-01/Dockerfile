@@ -3,8 +3,8 @@ FROM nginx:1.26.3-alpine
 #RUN wget -O /usr/local/bin/tini https://github.com/krallin/tini/releases/latest/download/tini && \
 #RUN wget -O /usr/local/bin/tini https://github.com/krallin/tini/releases/download/v0.19.0/tini && \
 RUN wget -O /usr/local/bin/tini https://github.com/krallin/tini/releases/download/v0.19.0/tini && \
-    chmod +x /usr/local/bin/tini
-    ls -ltr /usr/local/bin/tini
+    chmod +x /usr/local/bin/tini && \
+    ls -ltr /usr/local/bin/tini && \
     ldd /usr/local/bin/tini
     #chmod +x /usr/local/bin/tini
 
