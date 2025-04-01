@@ -82,10 +82,10 @@ spec:
             initialDelaySeconds: 25
             periodSeconds: 3
             failureThreshold: 3
-          volumes:
-            - name: nginx-storage
-            persistentVolumeClaim:
-              claimName: nginx-storage
+      volumes:
+        - name: nginx-storage
+          persistentVolumeClaim:
+            claimName: nginx-storage
   
             
       imagePullSecrets:
