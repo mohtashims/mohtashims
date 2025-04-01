@@ -78,6 +78,9 @@ jobs:
         run: |
           kind create cluster --name secure-nginx-cluster --config kind-cluster-config.yaml
 
+      - name: Create nginx-namespace
+        run: kubectl create namespace nginx-namespace || echo "Namespace nginx-namespace already exists"
+
       - name: Set up Kubectl
         uses: azure/setup-kubectl@v3
 
