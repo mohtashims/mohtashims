@@ -70,7 +70,7 @@ jobs:
 
       - name: Update Kubernetes deployment file
         run: |
-          NEW_IMAGE="${{ env.REGISTRY }}/secure-nginx:1.19-${{ github.sha }}"          
+          NEW_IMAGE="${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-${{ github.sha }}"          
           sed -i "s|image: .*|image: ${NEW_IMAGE}|g" QA-02/nginx_stateful.yaml
           echo "Updated deployment to use image: ${NEW_IMAGE}"
 
