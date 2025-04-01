@@ -27,7 +27,6 @@ jobs:
 
       - name: Log in to Github Container Registry
         uses: docker/login-action@v3.0.0
-        #uses: docker/login-action@3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -104,7 +103,7 @@ jobs:
         run: |
           kubectl apply -f QA-02/nginx_stateful.yaml || exit 1
           kubectl wait --for=condition=available --timeout=600s statefulset.apps/securenginx-statefulset -n nginx-namespace          
-          kubectl rollout status statefulset/securenginx-statefulset || exit 1
+          kubectl rollout status apps.statefulset/securenginx-statefulset || exit 1
 
 
       - name: Commit and push changes
