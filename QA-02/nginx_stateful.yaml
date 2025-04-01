@@ -3,14 +3,14 @@ kind: StorageClass
 metadata:
   name: standard
 provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
+#volumeBindingMode: WaitForFirstConsumer
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nginx-storage-pv
-  namespace: nginx-namespace
 spec:
   capacity:
     storage: 8Gi
