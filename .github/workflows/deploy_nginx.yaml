@@ -97,7 +97,8 @@ jobs:
         run: |
           kind create cluster --name secure-nginx-cluster --config QA-02/kind-cluster-config.yaml
 
-          
+      - name: Create nginx-namespace
+        run: kubectl create namespace nginx-namespace || echo "Namespace nginx-namespace already exists"          
 
       - name: Deploy to Kubernetes
         run: |
