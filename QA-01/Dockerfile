@@ -1,4 +1,4 @@
-FROM nginx:1.26.3-alpine3.18
+FROM nginx:1.26.3-alpine
 
 RUN wget https://github.com/just-containers/tini/releases/download/v0.19.0/tini-static-arm64 -O /usr/local/bin/tini && \
 chmod +x /usr/local/bin/tini
