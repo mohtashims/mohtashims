@@ -37,19 +37,19 @@ jobs:
         run: ls -R; pwd
 
       - name: Build Docker image
-        run: docker build -t "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-${{ github.sha }}" QA-01/. || exit 1
+        run: docker build -t "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" QA-01/. || exit 1
 
 
       - name: Scan with Trivy
         uses: aquasecurity/trivy-action@0.26.0
         with:
-          image-ref: "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-${{ github.sha }}"
+          image-ref: "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}"
           format: table
           exit-code: 1
           severity: HIGH,CRITICAL
 
       - name: Push to GCR
-        run: docker push "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-${{ github.sha }}" || exit 1
+        run: docker push "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" || exit 1
 
 
   deploy:
@@ -71,7 +71,7 @@ jobs:
 
       - name: Update Kubernetes deployment file
         run: |
-          NEW_IMAGE="${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-${{ github.sha }}"          
+          NEW_IMAGE="${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}"          
           sed -i "s|image: .*|image: ${NEW_IMAGE}|g" QA-02/nginx_stateful.yaml
           echo "Updated deployment to use image: ${NEW_IMAGE}"
 
@@ -131,7 +131,7 @@ jobs:
       - name: Commit and push changes
         run: |
           git add QA-02/nginx_stateful.yaml
-          git commit -m "Updated deployment with new image name: ${{ env.REGISTRY }}/secure-nginx:1.19-${{ github.sha }}" || echo "No changes to commit"
+          git commit -m "Updated deployment with new image name: ${{ env.REGISTRY }}/secure-nginx:1.19-alpine${{ github.sha }}" || echo "No changes to commit"
           git push
 
 
