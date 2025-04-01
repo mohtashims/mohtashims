@@ -10,6 +10,7 @@ FROM nginx:1.26.3-alpine
 
 #RUN apk add --no-cache tini-0.19.0-r3
 RUN apk add --no-cache tini=0.19.0-r3 && tini --version && which tini
+    chmod +x /sbin/tini
 
 #RUN apk add --no-cache tini && tini --version
 
@@ -23,6 +24,6 @@ USER newnginx
 EXPOSE 443
 
 #ENTRYPOINT ["/sbin/tini", "--"]
-ENTRYPOINT ["/usr/local/bin/tini", "--"]
+ENTRYPOINT ["/sbin/tini", "--"]
 
 CMD ["nginx", "-g", "daemon off;"]
