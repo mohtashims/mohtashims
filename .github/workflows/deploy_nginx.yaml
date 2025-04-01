@@ -31,6 +31,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GCRTOKEN }}
 
+      - name: Verify Files in Workspace
+        run: ls -R; pwd
 
       - name: Build Docker image
         run: docker build -t "${{ env.REGISTRY }}/secure-nginx:1.19-${{ github.sha }}" QA-01/. || exit 1
