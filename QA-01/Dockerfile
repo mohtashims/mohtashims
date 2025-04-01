@@ -21,8 +21,12 @@ RUN apk add --no-cache tini=0.19.0-r0 && tini --version && which tini && \
 
 RUN addgroup -S newnginx || true && getent passwd newnginx || adduser -S newnginx -G newnginx
 
+# This adds the capability to bind to low ports (ports below 1024)
+RUN apk add --no-cache libcap && setcap cap_net_bind_service=+ep /usr/sbin/nginx
+
 USER newnginx
 
+EXPOSE 80
 EXPOSE 443
 
 #ENTRYPOINT ["/sbin/tini", "--"]
