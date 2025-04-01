@@ -98,12 +98,12 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
-      - name: Notify on Success
-        if: success()
-        run: |
-          echo "Sending out notification for successful deployment using email or slack"
+    - name: Notify on Success
+      if: ${{ needs.build.result == 'success' && needs.deploy.result == 'success' }}
+      run: |
+        echo "Sending out notification for successful deployment using email or slack"
 
-      - name: Notify on Failure
-        if: failure()
-        run: |
-          echo "Sending out notification for Failed deployment using email or slack"
+    - name: Notify on Failure
+      if: ${{ needs.build.result != 'success' || needs.deploy.result != 'success' }}
+      run: |
+        echo "Sending out notification for Failed deployment using email or slack"
