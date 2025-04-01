@@ -102,10 +102,12 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f QA-02/nginx_stateful.yaml || exit 1
-          sleep 40
+          sleep 30
           kubectl get pods -n nginx-namespace
-          sleep 20
+          sleep 10
           kubectl get pvc -n nginx-namespace
+          sleep 10
+          kubectl get pv
 
           kubectl wait --for=condition=available --timeout=70s statefulset.apps/securenginx-statefulset -n nginx-namespace          
           kubectl rollout status apps.statefulset/securenginx-statefulset || exit 1
@@ -132,3 +134,4 @@ jobs:
       if: ${{ needs.build.result != 'success' || needs.deploy.result != 'success' }}
       run: |
         echo "Sending out notification for Failed deployment using email or slack"
+        exit 1;
