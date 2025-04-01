@@ -68,6 +68,17 @@ jobs:
           sed -i "s|image: .*|image: ${NEW_IMAGE}|g" QA-02/nginx_stateful.yaml
           echo "Updated deployment to use image: ${NEW_IMAGE}"
 
+      - name: Install Kind
+        run: |
+          curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.18.0/kind-linux-amd64
+          chmod +x ./kind
+          mv ./kind /usr/local/bin/kind
+
+      - name: Create Kind Cluster
+        run: |
+          kind create cluster --name secure-nginx-cluster --config kind-cluster-config.yaml
+
+
       - name: Set up Kubectl
         uses: azure/setup-kubectl@v3
 
