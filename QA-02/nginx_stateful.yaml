@@ -45,6 +45,8 @@ spec:
         runAsGroup: 1003
         fsGroup: 2007
         runAsNonRoot: true
+        capabilities:
+          add: ["NET_BIND_SERVICE"]
         
       containers:
         - name: nginx
