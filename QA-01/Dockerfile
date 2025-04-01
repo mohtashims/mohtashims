@@ -1,4 +1,4 @@
-FROM nginx:1.19-alpine
+FROM nginx:1.26.3-alpine
 
 RUN apk add --no-cache tini=0.19.0-r0
 
