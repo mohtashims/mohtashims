@@ -1,4 +1,5 @@
-FROM nginx:1.26.3-alpine
+#FROM nginx:1.26.3-alpine
+FROM nginx:1.19-alpine
 
 #RUN wget -O /usr/local/bin/tini https://github.com/krallin/tini/releases/latest/download/tini && \
 #RUN wget -O /usr/local/bin/tini https://github.com/krallin/tini/releases/download/v0.19.0/tini && \
