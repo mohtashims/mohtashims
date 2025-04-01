@@ -86,6 +86,18 @@ jobs:
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" | base64 -d > ~/.kube/config
           chmod 600 ~/.kube/config  # Secure the file
+
+      - name: Install Kind
+        run: |
+          curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.18.0/kind-linux-amd64
+          chmod +x ./kind
+          mv ./kind /usr/local/bin/kind
+
+      - name: Create Kind Cluster
+        run: |
+          kind create cluster --name secure-nginx-cluster --config kind-cluster-config.yaml
+
+          
       
 
       - name: Deploy to Kubernetes
