@@ -83,7 +83,7 @@ jobs:
       - name: Commit and push changes
         run: |
           git add QA-02/nginx_stateful.yaml
-          git commit -m "Updated deployment with new image name: ${{ REGISTRY }}/secure-nginx:1.19:${{ github.sha }}" || echo "No changes to commit"
+          git commit -m "Updated deployment with new image name: ${{ env.REGISTRY }}/secure-nginx:1.19:${{ github.sha }}" || echo "No changes to commit"
           git push
 
 
