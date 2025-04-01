@@ -109,6 +109,8 @@ jobs:
           kubectl config set-context --current --namespace=nginx-namespace
 
           kubectl describe pods -n nginx-namespace
+          kubectl describe statefulset securenginx-statefulset -n nginx-namespace
+          kubectl get secret github-container-registry -n nginx-namespace
 
           kubectl apply -f QA-02/nginx_stateful.yaml || exit 1
           sleep 30
