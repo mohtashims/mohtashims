@@ -108,6 +108,8 @@ jobs:
           kubectl get pvc -n nginx-namespace
           sleep 10
           kubectl get pv
+          sleep 10
+          kubectl get storageclass
 
           kubectl wait --for=condition=available --timeout=70s statefulset.apps/securenginx-statefulset -n nginx-namespace          
           kubectl rollout status apps.statefulset/securenginx-statefulset || exit 1
