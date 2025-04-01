@@ -50,7 +50,7 @@ jobs:
           severity: HIGH,CRITICAL
 
       - name: Push to GCR
-        run: docker push "${{ env.REGISTRY }}/secure-nginx:1.19-${{ github.sha }}" || exit 1
+        run: docker push "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-${{ github.sha }}" || exit 1
 
 
   deploy:
