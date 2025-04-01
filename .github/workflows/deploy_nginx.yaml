@@ -78,8 +78,15 @@ jobs:
       - name: Set up Kubectl
         uses: azure/setup-kubectl@v3
 
+      # - name: Load Kubernetes config
+      #   run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > ~/.kube/config
+
       - name: Load Kubernetes config
-        run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > ~/.kube/config
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config  # Secure the file
+      
 
       - name: Deploy to Kubernetes
         run: |
