@@ -105,10 +105,15 @@ jobs:
 
           kubectl get storageclass
           kubectl delete storageclass standard
+          kubectl get namespace nginx-namespace
+          kubectl config set-context --current --namespace=nginx-namespace
+
+          kubectl describe pods -n nginx-namespace
 
           kubectl apply -f QA-02/nginx_stateful.yaml || exit 1
           sleep 30
           kubectl get pods -n nginx-namespace
+          kubectl describe pods -n nginx-namespace
           sleep 10
           kubectl get pvc -n nginx-namespace
           sleep 10
