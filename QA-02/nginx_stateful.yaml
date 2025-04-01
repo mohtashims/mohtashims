@@ -51,6 +51,13 @@ spec:
           image: secure-nginx:1.19-alpine
           ports:
             - containerPort: 443
+
+          volumes:
+            - name: nginx-cache
+              emptyDir: {}
+          volumeMounts:
+            - name: nginx-cache
+              mountPath: /var/cache/nginx    
           volumeMounts:
             - name: nginx-storage
               mountPath: /usr/share/nginx/html
