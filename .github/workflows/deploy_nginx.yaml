@@ -44,7 +44,7 @@ jobs:
       - name: Scan with Trivy
         uses: aquasecurity/trivy-action@0.26.0
         with:
-          image-ref: "${{ env.REGISTRY }}/secure-nginx:1.19-${{ github.sha }}"
+          image-ref: "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-${{ github.sha }}"
           format: table
           exit-code: 1
           severity: HIGH,CRITICAL
