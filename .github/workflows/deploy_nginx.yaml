@@ -135,6 +135,8 @@ jobs:
           kubectl describe statefulset securenginx-statefulset -n nginx-namespace
           kubectl get secret github-container-registry -n nginx-namespace
     
+          kubectl logs securenginx-statefulset-0 -n nginx-namespace
+
           kubectl wait --for=condition=available --timeout=70s statefulset.apps/securenginx-statefulset -n nginx-namespace          
           kubectl rollout status apps.statefulset/securenginx-statefulset || exit 1
 
