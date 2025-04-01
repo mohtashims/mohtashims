@@ -9,7 +9,9 @@ FROM nginx:1.26.3-alpine
 #    #chmod +x /usr/local/bin/tini
 
 #RUN apk add --no-cache tini-0.19.0-r3
-RUN apk add --no-cache tini && tini --version
+RUN apk add --no-cache tini=0.19.0-r3 && tini --version && where tini
+
+#RUN apk add --no-cache tini && tini --version
 
 
 RUN apk update && apk upgrade --no-cache
