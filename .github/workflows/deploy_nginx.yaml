@@ -40,6 +40,11 @@ jobs:
       - name: Build Docker image
         run: docker build --network=host -t "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" QA-01/. || exit 1
 
+      - name: Run container and check tini
+        run: |
+          docker run --rm "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" \
+            sh -c "[ -x /usr/local/bin/tini ] && echo 'Tini is installed and executable' || { echo 'Tini check failed'; exit 1; }"
+
 
       - name: Scan with Trivy
         uses: aquasecurity/trivy-action@0.26.0
