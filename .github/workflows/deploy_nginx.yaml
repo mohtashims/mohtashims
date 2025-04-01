@@ -100,6 +100,19 @@ jobs:
       - name: Create nginx-namespace
         run: kubectl create namespace nginx-namespace || echo "Namespace nginx-namespace already exists"          
 
+
+      - name: Create image pull secret
+        run: |
+          kubectl create namespace nginx-namespace --dry-run=client -o yaml | kubectl apply -f -
+    
+          kubectl create secret docker-registry github-container-registry \
+            --namespace=nginx-namespace \
+            --docker-server=${{ env.REGISTRY }} \
+            --docker-username=${{ github.actor }} \
+            --docker-password=${{ secrets.GCRTOKEN }} \
+            --docker-email=shifahim@gmail.com \
+            --dry-run=client -o yaml | kubectl apply -f -
+
       - name: Deploy to Kubernetes
         run: |
 
