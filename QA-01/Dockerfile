@@ -14,6 +14,7 @@ USER newnginx
 
 EXPOSE 443
 
-ENTRYPOINT ["/sbin/tini", "--"]
+#ENTRYPOINT ["/sbin/tini", "--"]
+ENTRYPOINT ["/usr/local/bin/tini", "--"]
 
 CMD ["nginx", "-g", "daemon off;"]
