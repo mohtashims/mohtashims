@@ -102,7 +102,7 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f QA-02/nginx_stateful.yaml || exit 1
-          kubectl wait --for=condition=available --timeout=600s statefulset.apps/securenginx-statefulset -n nginx-namespace          
+          kubectl wait --for=condition=available --timeout=90s statefulset.apps/securenginx-statefulset -n nginx-namespace          
           kubectl rollout status apps.statefulset/securenginx-statefulset || exit 1
 
 
