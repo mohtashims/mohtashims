@@ -46,7 +46,7 @@ jobs:
 
       - name: Run Docker image
         run: |
-          docker run --name "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" -d "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}"
+          docker run --name "mohtashim_secure-nginx1.19-alpine${{ github.sha }}" -d "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}"
           docker ps -a
 
             
