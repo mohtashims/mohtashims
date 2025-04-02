@@ -8,7 +8,9 @@ RUN apk add --no-cache tini=0.19.0-r0 && tini --version && which tini && \
 
 
 
-RUN addgroup -S newnginx || true && getent passwd newnginx || adduser -S newnginx -G newnginx
+#RUN addgroup -S newnginx || true && getent passwd newnginx || adduser -S newnginx -G newnginx
+RUN getent group newnginx || addgroup -S -g 1003 newnginx; getent passwd newnginx || adduser -S -u 1003 -G newnginx newnginx
+
 
 # This adds the capability to bind to low ports (ports below 1024)
 #RUN apk add --no-cache libcap && setcap cap_net_bind_service=+ep /usr/sbin/nginx
