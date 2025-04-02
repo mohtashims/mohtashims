@@ -13,7 +13,7 @@ RUN getent group newnginx || addgroup -S -g 1003 newnginx; getent passwd newngin
 
 
 # This adds the capability to bind to low ports (ports below 1024)
-#RUN apk add --no-cache libcap && setcap cap_net_bind_service=+ep /usr/sbin/nginx
+RUN apk add --no-cache libcap && setcap cap_net_bind_service=+ep /usr/sbin/nginx
 
 RUN mkdir -p  /var/log/nginx /var/cache/nginx/proxy_temp /var/cache/nginx/client_temp && \
     chown -R newnginx:newnginx  /var/log/nginx /var/cache/nginx
