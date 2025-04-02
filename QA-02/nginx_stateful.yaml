@@ -61,6 +61,8 @@ spec:
               mountPath: /var/log/nginx
             - name: nginx-storage
               mountPath: /usr/share/nginx/html
+            - name: tmp-dir
+              mountPath: /tmp  
           resources:
             limits:
               memory: "512Mi"
@@ -98,7 +100,8 @@ spec:
         - name: nginx-storage
           persistentVolumeClaim:
             claimName: nginx-storage
-  
+        - name: tmp-dir
+          emptyDir: {}
             
       imagePullSecrets:
         - name: github-container-registry
