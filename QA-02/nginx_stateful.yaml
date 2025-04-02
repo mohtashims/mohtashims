@@ -41,7 +41,7 @@ spec:
         app: nginx
     spec:
       securityContext:
-        runAsUser: 1003
+        runAsUser: 0
         runAsGroup: 1003
         fsGroup: 1003
         runAsNonRoot: false
