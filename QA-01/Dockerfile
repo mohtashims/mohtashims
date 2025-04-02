@@ -20,8 +20,8 @@ RUN mkdir -p  /var/log/nginx /var/cache/nginx/proxy_temp /var/cache/nginx/client
 
 
 
-RUN sed -i 's/^pid /# pid /g' /etc/nginx/nginx.conf
-
+#RUN sed -i 's/^pid /# pid /g' /etc/nginx/nginx.conf
+RUN sed -i -e '/^user /d' -e 's/^pid /# pid /g' /etc/nginx/nginx.conf
 
 USER newnginx
 
