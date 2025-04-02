@@ -24,6 +24,11 @@ RUN addgroup -S newnginx || true && getent passwd newnginx || adduser -S newngin
 # This adds the capability to bind to low ports (ports below 1024)
 RUN apk add --no-cache libcap && setcap cap_net_bind_service=+ep /usr/sbin/nginx
 
+RUN mkdir -p /var/run/nginx /var/log/nginx /var/cache/nginx/client_temp && \
+    touch /var/run/nginx.pid && \
+    chown -R newnginx:newnginx /var/run/nginx /var/log/nginx /var/cache/nginx/client_temp
+
+
 USER newnginx
 
 EXPOSE 80
