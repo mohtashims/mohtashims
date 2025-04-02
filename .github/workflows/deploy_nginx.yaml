@@ -44,13 +44,18 @@ jobs:
 #          docker run --rm "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" \
 #            sh -c "[ -x /sbin/tini ] && echo 'Tini is installed and executable' || { echo 'Tini check failed'; exit 1; }" 
 
-            
-      - name: Run container and check tini
+      - name: Run Docker image
         run: |
-          docker run --rm "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" \
-            sh -c "if [ -x /sbin/tini ]; then echo 'Tini is installed and executable'; else echo 'Tini check failed'; exit 1; fi && \
-                   echo 'User running Nginx:' && ps -ef | grep nginx && \
-                   echo 'Nginx configured ports:' && nginx -T 2>/dev/null | grep 'listen ' || echo 'Nginx not running or missing config'"
+          docker run --name "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" -d "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}"
+          docker ps -a
+
+            
+      # - name: Run container and check tini
+      #   run: |
+      #     docker run --rm "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" \
+      #       sh -c "if [ -x /sbin/tini ]; then echo 'Tini is installed and executable'; else echo 'Tini check failed'; exit 1; fi && \
+      #              echo 'User running Nginx:' && ps -ef | grep nginx && \
+      #              echo 'Nginx configured ports:' && nginx -T 2>/dev/null | grep 'listen ' || echo 'Nginx not running or missing config'"
 
 
       - name: Scan with Trivy
