@@ -93,8 +93,11 @@ jobs:
           sed -i "s|image: .*|image: ${NEW_IMAGE}|g" QA-02/nginx_stateful.yaml
           echo "Updated deployment to use image: ${NEW_IMAGE}"
 
-      - name: Create nginx-storage directory
-        run: mkdir -p /home/runner/nginx-storage
+      - name: Create nginx-storage directory and add index.html
+        run: |
+          mkdir -p /home/runner/nginx-storage
+          echo "<html><body><h1>Mohtashim Nginx!</h1></body></html>" > /home/runner/nginx-storage/index.html
+
     
       - name: Set up Kubectl
         uses: azure/setup-kubectl@v3
