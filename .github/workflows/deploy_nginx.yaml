@@ -158,6 +158,34 @@ jobs:
     
           kubectl logs nginx-statefulset-0 -n nginx-namespace
 
+
+          kubectl get pods -n nginx-namespace
+          sleep 8
+          kubectl get pods -n nginx-namespace
+          sleep 8
+          kubectl get pods -n nginx-namespace
+          sleep 8
+          kubectl get pods -n nginx-namespace
+          sleep 8
+          kubectl get pods -n nginx-namespace
+          sleep 8
+          kubectl get pods -n nginx-namespace
+          sleep 8
+          kubectl get pods -n nginx-namespace
+          sleep 8
+          kubectl get pvc -n nginx-namespace
+          sleep 8
+          kubectl get pv -n nginx-namespace
+          sleep 8
+          kubectl logs nginx-statefulset-0 -n nginx-namespace
+          sleep 8
+          kubectl get storageclass
+          sleep 8
+          kubectl describe pod nginx-statefulset-0 -n nginx-namespace
+          sleep 8
+          kubectl get pod nginx-statefulset-0 -n nginx-namespace -o wide
+          sleep 8
+
           kubectl wait --for=condition=ready --timeout=50s statefulset.apps/nginx-statefulset -n nginx-namespace          
           kubectl rollout status apps.statefulset/nginx-statefulset || exit 1
 
