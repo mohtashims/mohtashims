@@ -158,7 +158,7 @@ jobs:
     
           kubectl logs nginx-statefulset-0 -n nginx-namespace
 
-          kubectl wait --for=condition=available --timeout=70s statefulset.apps/nginx-statefulset -n nginx-namespace          
+          kubectl wait --for=condition=ready --timeout=50s statefulset.apps/nginx-statefulset -n nginx-namespace          
           kubectl rollout status apps.statefulset/nginx-statefulset || exit 1
 
 
