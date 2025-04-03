@@ -121,10 +121,6 @@ jobs:
         run: |
           kind create cluster --name secure-nginx-cluster --config QA-02/kind-cluster-config.yaml
 
-      - name: Create nginx-namespace
-        run: kubectl create namespace nginx-namespace || echo "Namespace nginx-namespace already exists"          
-
-
       - name: Create image pull secret
         run: |
           kubectl create namespace nginx-namespace --dry-run=client -o yaml | kubectl apply -f -
@@ -161,7 +157,7 @@ jobs:
     
           kubectl logs nginx-statefulset-0 -n nginx-namespace
 
-          kubectl get pods -n nginx-namespace --watch
+          
           sleep 4
           kubectl get pods -n nginx-namespace
           sleep 4
@@ -195,6 +191,7 @@ jobs:
           kubectl get pods -n nginx-namespace
           sleep 4
           kubectl wait --for=condition=ready --timeout=50s statefulset.apps/nginx-statefulset -n nginx-namespace
+          kubectl get pods -n nginx-namespace --watch
           kubectl rollout status apps.statefulset/nginx-statefulset || exit 1
 
 
