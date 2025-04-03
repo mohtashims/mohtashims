@@ -109,15 +109,18 @@ spec:
             httpGet:
               path: /
               port: 80
-              scheme: HTTP
+              #scheme: HTTP
+            timeoutSeconds: 2
             initialDelaySeconds: 30
             periodSeconds: 5
             failureThreshold: 3
+ 
           readinessProbe:
             httpGet:
               path: /
               port: 80
-              scheme: HTTP
+              #scheme: HTTP
+            timeoutSeconds: 2  
             initialDelaySeconds: 25
             periodSeconds: 3
             failureThreshold: 3
