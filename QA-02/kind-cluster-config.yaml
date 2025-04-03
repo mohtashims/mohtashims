@@ -1,6 +1,11 @@
-# kind-cluster-config.yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
   - role: control-plane
+    extraMounts:
+      - hostPath: /home/runner/nginx-storage
+        containerPath: /mnt/nginx-storage
   - role: worker
+    extraMounts:
+      - hostPath: /home/runner/nginx-storage
+        containerPath: /mnt/nginx-storage
