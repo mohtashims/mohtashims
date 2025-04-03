@@ -33,12 +33,12 @@ spec:
   storageClassName: standard
   local:
     path: /mnt/nginx-storage
-  # nodeAffinity:
-  #   required:
-  #     nodeSelectorTerms:
-  #       - matchExpressions:
-  #           - key: node-role.kubernetes.io/control-plane
-  #             operator: DoesNotExist   
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: Exists
   # hostPath:
   #   path: "/tmp/nginx-storage"    
   # nodeAffinity:
