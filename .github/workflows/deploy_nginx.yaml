@@ -185,7 +185,8 @@ jobs:
           kubectl get pv -n nginx-namespace
           sleep 4
           
-          kubectl wait --for=condition=ready --timeout=50s statefulset.apps/nginx-statefulset -n nginx-namespace          
+          kubectl wait --for=condition=ready --timeout=50s statefulset.apps/nginx-statefulset -n nginx-namespace
+          kubectl get pods -n nginx-namespace -l app=nginx
           kubectl rollout status apps.statefulset/nginx-statefulset || exit 1
 
 
