@@ -153,13 +153,13 @@ jobs:
           # Then check and describe resources
           kubectl get pods -n nginx-namespace
           kubectl describe pods -n nginx-namespace
-          kubectl describe statefulset securenginx-statefulset -n nginx-namespace
+          kubectl describe statefulset nginx-statefulset -n nginx-namespace
           kubectl get secret github-container-registry -n nginx-namespace
     
-          kubectl logs securenginx-statefulset-0 -n nginx-namespace
+          kubectl logs nginx-statefulset-0 -n nginx-namespace
 
-          kubectl wait --for=condition=available --timeout=70s statefulset.apps/securenginx-statefulset -n nginx-namespace          
-          kubectl rollout status apps.statefulset/securenginx-statefulset || exit 1
+          kubectl wait --for=condition=available --timeout=70s statefulset.apps/nginx-statefulset -n nginx-namespace          
+          kubectl rollout status apps.statefulset/nginx-statefulset || exit 1
 
 
       - name: Commit and push changes
