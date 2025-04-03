@@ -33,17 +33,23 @@ spec:
   storageClassName: standard
   local:
     path: /mnt/nginx-storage
-  # hostPath:
-  #   path: "/tmp/nginx-storage"    
   nodeAffinity:
     required:
       nodeSelectorTerms:
         - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - secure-nginx-cluster-worker  # Add your worker node name here
-                - kind-control-plane           # Or remove this line if you don't want to restrict to control-plane
+            - key: node-role.kubernetes.io/control-plane
+              operator: DoesNotExist   
+  # hostPath:
+  #   path: "/tmp/nginx-storage"    
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #       - matchExpressions:
+  #           - key: kubernetes.io/hostname
+  #             operator: In
+  #             values:
+  #               - secure-nginx-cluster-worker  # Add your worker node name here
+  #               - kind-control-plane           # Or remove this line if you don't want to restrict to control-plane
 
   # nodeAffinity:
   #   required:
