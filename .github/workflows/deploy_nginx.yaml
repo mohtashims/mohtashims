@@ -201,7 +201,9 @@ jobs:
           kubectl logs nginx-statefulset-1 -n nginx-namespace
           date; kubectl describe statefulset nginx-statefulset -n nginx-namespace
           date; kubectl get statefulset nginx-statefulset -n nginx-namespace -o yaml
-          date; kubectl wait --for=condition=ready --timeout=50s statefulset.apps/nginx-statefulset -n nginx-namespace
+          #date; kubectl wait --for=condition=ready --timeout=50s statefulset.apps/nginx-statefulset -n nginx-namespace
+          kubectl wait --for=condition=Ready pod/nginx-statefulset-0 -n nginx-namespace --timeout=60s
+          kubectl wait --for=condition=Ready pod/nginx-statefulset-1 -n nginx-namespace --timeout=60s
           #kubectl get pods -n nginx-namespace --watch
           kubectl rollout status apps.statefulset/nginx-statefulset || exit 1
 
