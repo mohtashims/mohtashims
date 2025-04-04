@@ -118,7 +118,7 @@ spec:
             httpGet:
               path: /
               port: 80
-              #scheme: HTTP
+              scheme: HTTP
             timeoutSeconds: 2
             initialDelaySeconds: 30
             periodSeconds: 5
@@ -128,7 +128,7 @@ spec:
             httpGet:
               path: /
               port: 80
-              #scheme: HTTP
+              scheme: HTTP
             timeoutSeconds: 2  
             initialDelaySeconds: 25
             periodSeconds: 3
