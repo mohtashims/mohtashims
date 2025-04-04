@@ -20,10 +20,10 @@ RUN apk add --no-cache libcap && setcap 'cap_net_bind_service=+ep' /usr/sbin/ngi
 RUN mkdir -p  /var/log/nginx /var/cache/nginx/proxy_temp /var/cache/nginx/client_temp /usr/share/nginx/html && \
     chown -R newnginx:newnginx  /var/log/nginx /var/cache/nginx /usr/share/nginx
 
-RUN echo "<html><body><h1>Hello from Nginx!</h1></body></html>" > /usr/share/nginx/html/index.html
+#RUN echo "<html><body><h1>Hello from Nginx!</h1></body></html>" > /usr/share/nginx/html/index.html
 
 
-RUN chmod 775 /usr/share/nginx/html/index.html
+#RUN chmod 775 /usr/share/nginx/html/index.html
 
 
 
