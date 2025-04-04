@@ -33,18 +33,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GCRTOKEN }}
 
-      - name: Verify Files in Workspace
-        run: ls -R; pwd
 
       - name: Build Docker image
         run: docker build -t "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}" QA-01/. || exit 1
-
-      - name: Run Docker image
-        run: |
-          docker run --name "mohtashim_secure-nginx1.19-alpine${{ github.sha }}" -d "${{ env.REGISTRY }}/${{ github.actor }}/secure-nginx:1.19-alpine${{ github.sha }}"
-          docker ps -a
-
-
 
       - name: Scan with Trivy
         uses: aquasecurity/trivy-action@0.26.0
