@@ -147,7 +147,6 @@ jobs:
 
           # Apply the YAML first
           kubectl apply -f QA-02/nginx_stateful.yaml || exit 1
-          sleep 30
 
           # Then check and describe resources
           kubectl get pods -n nginx-namespace
@@ -157,32 +156,17 @@ jobs:
     
           kubectl logs nginx-statefulset-0 -n nginx-namespace
 
-          
-          sleep 4
           kubectl get pods -n nginx-namespace
           sleep 4
-          kubectl get pods -n nginx-namespace
-          sleep 4
-          kubectl get pods -n nginx-namespace
-          sleep 4
-          kubectl get pvc -n nginx-namespace
-          sleep 4
-          kubectl get nodes
-          sleep 3
-          kubectl describe node secure-nginx-cluster-worker
-          sleep 3
-          kubectl logs nginx-statefulset-0 -n nginx-namespace
-          sleep 3
-          kubectl get storageclass
-          sleep 3
-          #kubectl describe pod nginx-statefulset-0 -n nginx-namespace
-          #sleep 3
+          kubectl wait --for=condition=Ready pod/nginx-statefulset-0 -n nginx-namespace --timeout=60s
+          kubectl wait --for=condition=Ready pod/nginx-statefulset-1 -n nginx-namespace --timeout=60s
           kubectl get pods -n nginx-namespace -o wide
-          sleep 3
+          kubectl get nodes
+          kubectl describe node secure-nginx-cluster-worker
+          kubectl logs nginx-statefulset-0 -n nginx-namespace
+          kubectl get storageclass
           kubectl get pvc -n nginx-namespace
-          sleep 3
           kubectl get pv -n nginx-namespace
-          sleep 3
           echo "start1"
           kubectl get statefulset nginx-statefulset -n nginx-namespace
           echo "end1"
@@ -194,16 +178,12 @@ jobs:
           #kubectl describe pod nginx-statefulset-1 -n nginx-namespace | grep -A10 "Readiness probe"
           #sleep 3
           #kubectl get pods -n nginx-namespace -l app=nginx
-          kubectl get pods -n nginx-namespace
-          sleep 4
-          
+          kubectl get pods -n nginx-namespace          
           kubectl get statefulset nginx-statefulset -n nginx-namespace -o json | jq '.status.conditions'
           kubectl logs nginx-statefulset-1 -n nginx-namespace
           date; kubectl describe statefulset nginx-statefulset -n nginx-namespace
           date; kubectl get statefulset nginx-statefulset -n nginx-namespace -o yaml
           #date; kubectl wait --for=condition=ready --timeout=50s statefulset.apps/nginx-statefulset -n nginx-namespace
-          kubectl wait --for=condition=Ready pod/nginx-statefulset-0 -n nginx-namespace --timeout=60s
-          kubectl wait --for=condition=Ready pod/nginx-statefulset-1 -n nginx-namespace --timeout=60s
           #kubectl get pods -n nginx-namespace --watch
           kubectl rollout status statefulset/nginx-statefulset -n nginx-namespace || exit 1
 
