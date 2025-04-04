@@ -183,6 +183,12 @@ jobs:
           sleep 3
           kubectl get pv -n nginx-namespace
           sleep 3
+          echo "start1"
+          kubectl get statefulset nginx-statefulset -n nginx-namespace
+          echo "end1"
+          echo "start2"
+          kubectl get statefulset nginx-statefulset -n nginx-namespace -o json | jq '.status.conditions'
+          echo "end2"
           #kubectl describe pod nginx-statefulset-0 -n nginx-namespace | grep -A10 "Readiness probe"
           #sleep 3
           #kubectl describe pod nginx-statefulset-1 -n nginx-namespace | grep -A10 "Readiness probe"
