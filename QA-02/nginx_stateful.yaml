@@ -102,6 +102,7 @@ spec:
           securityContext:
             runAsUser: 1003
             runAsGroup: 1003
+            allowPrivilegeEscalation: false
             capabilities:
               add: ["NET_BIND_SERVICE"]
               drop: ["ALL"]
