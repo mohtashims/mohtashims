@@ -95,7 +95,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: secure-nginx:1.19-alpine
+          image: ghcr.io/mohtashims/secure-nginx:1.19-alpine3ddd118e939e9725ae084d20f7d0756672f2086f
           #imagePullPolicy: Never
           ports:
             - containerPort: 80
