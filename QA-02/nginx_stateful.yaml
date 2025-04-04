@@ -29,7 +29,7 @@ spec:
     storage: 8Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
+    - ReadOnlyMany
   storageClassName: standard
   local:
     path: /mnt/nginx-storage
@@ -70,7 +70,7 @@ metadata:
   namespace: nginx-namespace
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadOnlyMany
   resources:
     requests:
       storage: 8Gi
